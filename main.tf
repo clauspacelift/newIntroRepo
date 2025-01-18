@@ -1,27 +1,34 @@
-#A reusable Terraform module.
-
-
-resource "aws_instance" "example" {
-  count         = var.instance_count
-  ami           = "ami-12345678"
-  instance_type = var.instance_type
+terraform {
+    required_providers {
+      aws = {
+        source = "hashicorp/aws"
+    }
+    }
 }
 
-output "example_output" {
-  value = aws_instance.example[*].id
-}
-```
-
-### 5. `modules/example-module/variables.tf`
-#Module variables.
-
-#```hcl
-variable "instance_count" {
-  type        = number
-  description = "Number of instances to create."
+provider "aws" {
+    region = "us-east-1"
 }
 
-variable "instance_type" {
-  type        = string
-  description = "Instance type for the instances."
+#This block is responsible for creation of EC2 Instance
+resource "aws_instance" "web-server-instance" {
+    ami = "ami-067f484fdbe6dd509" #Predefined AMI with instaled Apache that shows 'Well Done' message when connecting
+    instance_type = "t2.micro"
+    key_name = "SpaceliftKeyPair"
+    vpc_security_group_ids = [aws_security_group.httpconnection.id] #Connecting the instance to the internet
+
+tags = {
+    Name = "spacelift-course-server"
+}
+}
+
+#This code allows us to connect the EC2 to the internet. Details of this block are not important right now.
+resource "aws_security_group" "httpconnection" {
+  description = "Allow incoming HTTP traffic on port 80"
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
