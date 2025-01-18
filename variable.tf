@@ -1,6 +1,6 @@
 #```hcl
 variable "aws_region" {
-  default = "us-east-1"
+  default = "eu-north-1"
 }
 
 variable "instance_count" {
@@ -8,7 +8,7 @@ variable "instance_count" {
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "context_env" {
