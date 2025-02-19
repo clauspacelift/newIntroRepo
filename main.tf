@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "backetname" {
+resource "aws_s3_bucket" "backetname225566" {
 bucket = var.bucket_name
 
 tags = {
