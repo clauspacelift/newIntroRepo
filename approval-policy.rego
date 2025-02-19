@@ -1,5 +1,7 @@
 #Define an approval policy for Spacelift.
 #//new stuff
+
+#another line
 #```rego
 package spacelift
 
