@@ -1,4 +1,4 @@
 variable "bucket_name" {
-description = "spaceliftb-clau2233"
+description = "bucket_test_name"
 type        = string
 }
