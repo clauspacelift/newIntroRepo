@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "backetname225566" {
 bucket = var.bucket_name
+test
 
 tags = {
 Name        = "My S3 Bucket"
